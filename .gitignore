@@ -62,5 +62,8 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# *** JMeter
+jmeter.log
+
 # *** OS X
 .DS_Store
