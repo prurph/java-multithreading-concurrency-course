@@ -3,7 +3,7 @@ package datastructures.stack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.LockSupport;
@@ -15,17 +15,15 @@ public class Main {
     int PUSHING_THREAD_COUNT = 2;
     int POPPING_THREAD_COUNT = 2;
 
-    Random random = new Random();
     // LockStack<Integer> stack = new LockStack<>();
     LockFreeStack<Integer> stack = new LockFreeStack<>();
     List<Thread> threads = new ArrayList<>();
-
-    new Random().ints(INITIAL_STACK_SIZE).forEach(stack::push);
+    ThreadLocalRandom.current().ints(INITIAL_STACK_SIZE).forEach(stack::push);
 
     for (int i = 0; i < PUSHING_THREAD_COUNT; i++) {
       Thread thread = new Thread(() -> {
         while (true) {
-          stack.push(random.nextInt());
+          stack.push(ThreadLocalRandom.current().nextInt());
         }
       });
       thread.setDaemon(true);
