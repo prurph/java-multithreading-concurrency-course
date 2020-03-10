@@ -54,7 +54,6 @@ public class Main {
         metrics.addSample(end - start);
       }
     }
-
   }
 
   private static class Metrics {
